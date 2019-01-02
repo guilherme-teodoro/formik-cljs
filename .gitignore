@@ -1,0 +1,7 @@
+.DS_Store
+/.nrepl-port
+/dist/
+/node_modules
+/public/js/compiled
+.shadow-cljs/
+.vscode

@@ -1,0 +1,31 @@
+{:dependencies [[binaryage/devtools "0.9.8"]
+                [reagent "0.8.1"]
+                [cider/cider-nrepl "0.16.0"]]
+
+ :source-paths ["src/dev" "src/main" "src/test" "src/formik-cljs"]
+
+ :nrepl        {:port 8230}
+
+ :builds       {:app
+                {:target     :browser
+                 :modules    {:base {:entries [demo.core]}}
+                 :output-dir "public/js/compiled"
+                 :asset-path "/js/compiled"
+                 :devtools   {:http-root    "public"
+                              :http-handler shadow.http.push-state/handle
+                              :http-port    8280
+                              :after-load   demo.core/mount-root
+                              :preloads     [devtools.preload]}}
+
+                :browser-test
+                {:target           :browser-test
+                 :ns-regexp        "-test$"
+                 :runner-ns        shadow.test.browser
+                 :test-dir         "out/browser-test"
+                 :devtools         {:http-root "out/browser-test"
+                                    :http-port 8290}}
+
+                :karma-test
+                {:target    :karma
+                 :ns-regexp "-test$"
+                 :output-to "out/karma/test.js"}}}
